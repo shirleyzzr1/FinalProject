@@ -58,5 +58,9 @@ namespace NRKernal.NRExamples
         {
             return m_NativeObject.Call<AndroidJavaObject>("insertVideo", originFilePath, displayName, folderName);
         }
+
+        public AndroidJavaObject InserttxtFile(string originFilePath,string displayName,string folderName){
+            return m_NativeObject.Call<AndroidJavaObject>("inserttxtFile", originFilePath, displayName, folderName,"text/plain"); 
+        }
     }
 }

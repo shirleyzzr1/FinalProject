@@ -20,5 +20,10 @@ namespace NRKernal.NRExamples
         {
             return null;
         }
+
+        public AndroidJavaObject InserttxtFile(string originFilePath, string displayName, string folderName)
+        {
+            return null;
+        }  
     }
 }

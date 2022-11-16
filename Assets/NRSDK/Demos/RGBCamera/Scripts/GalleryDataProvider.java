@@ -118,7 +118,6 @@ public class GalleryDataProvider {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return imageUri;
     }
 
@@ -169,6 +168,32 @@ public class GalleryDataProvider {
         }
 
         return uri;
+    }
+
+    /**
+     * @param originFilePath 原始文件路径
+     * @param displayName    存入的文件名 需要后缀(.txt)
+     * @param folderName     存入的文件夹
+     * @return 返回的uri路径
+     */    
+    public Uri inserttxtFile(final String originFilePath, final String displayName, final String folderName,final String mimeType) {
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
+        values.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH,
+        Environment.DIRECTORY_DOCUMENTS + File.separator + folderName);
+        Uri fileUri = mContentResolver.insert(MediaStore.Files.getContentUri("external"), values);
+        try {
+            File file = new File(originFilePath);
+            FileInputStream inputStream = new FileInputStream(file);
+            OutputStream outputStream = mContentResolver.openOutputStream(fileUri);
+            writeStreamToOutput(inputStream, outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileUri;
     }
 
     // endregion
