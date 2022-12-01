@@ -247,6 +247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VideoCaptureExample
       objectReference: {fileID: 0}
+    - target: {fileID: 5658424773558833754, guid: 9ba4a60e3e56bf947b53bd34f0325842, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5658424773968119982, guid: 9ba4a60e3e56bf947b53bd34f0325842, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1028,6 +1032,10 @@ PrefabInstance:
     - target: {fileID: 9056032654245542576, guid: a65a29a846c98d906a731be8bc0d81a4, type: 3}
       propertyPath: m_Name
       value: CustomNRVirtualDisplayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056032654245542576, guid: a65a29a846c98d906a731be8bc0d81a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a65a29a846c98d906a731be8bc0d81a4, type: 3}
