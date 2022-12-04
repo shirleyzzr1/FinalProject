@@ -1,4 +1,4 @@
-// Filename:    ObjectSpawner.cs 
+// Filename:    MoveObject.cs 
 // Summary:     Move object with the laser of the controller
 // Author:      Zhuoru Zhang
 // Date:        2022/10/29

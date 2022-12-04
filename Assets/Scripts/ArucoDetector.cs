@@ -158,11 +158,11 @@ public class ArucoDetector : MonoBehaviour
             reset_score = false;
 
             string filename = string.Format("pace_result_{0}.txt", NRTools.GetTimeStamp().ToString());
-            string folder = string.Format("{0}/PaceData", Application.persistentDataPath);
+            string folder = string.Format("{0}", Application.persistentDataPath);
             if (!Directory.Exists(folder))
-                {
+            {
                     Directory.CreateDirectory(folder);
-                }
+            }
             string[] result = new string[leftPos.Count];
             for(int i=0;i<leftPos.Count;i++){
                 result[i] = timestamp[i]+" "+ leftPos[i].x.ToString() + " "+leftPos[i].y.ToString()+ " "+ leftPos[i].z.ToString();
@@ -173,7 +173,7 @@ public class ArucoDetector : MonoBehaviour
                 galleryDataTool = new GalleryDataProvider();
             }
 
-            galleryDataTool.InserttxtFile(folder, filename, "Documents");
+            galleryDataTool.InserttxtFile(string.Format("{0}/{1}", folder, filename), filename, "Pacedata");
             timestamp.Clear();
             leftPos.Clear();
             LineDrawer.Instance.ClearLinePoint();

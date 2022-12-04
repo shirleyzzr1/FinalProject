@@ -181,10 +181,11 @@ public class GalleryDataProvider {
         ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
         values.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
-        values.put(MediaStore.MediaColumns.RELATIVE_PATH,
-        Environment.DIRECTORY_DOCUMENTS + File.separator + folderName);
-        Uri fileUri = mContentResolver.insert(MediaStore.Files.getContentUri("external"), values);
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH,Environment.DIRECTORY_DOWNLOADS + File.separator + folderName);
+        // Uri fileUri = mContentResolver.insert(MediaStore.Files.getContentUri("external"), values);
+        Uri fileUri = mContentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI,values);
         try {
+            System.out.println("originfilepath"+originFilePath);
             File file = new File(originFilePath);
             FileInputStream inputStream = new FileInputStream(file);
             OutputStream outputStream = mContentResolver.openOutputStream(fileUri);
