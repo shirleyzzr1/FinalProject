@@ -6,10 +6,16 @@ public class LineDrawer : MonoBehaviour
 {   
     public static LineDrawer Instance;
 
-    List<Vector3> linepoints;
+    List<Vector3> linepointsLeft;
+    List<Vector3> linepointsRight;
 
-    GameObject newline;
-    LineRenderer drawLine;
+
+
+    GameObject newlineLeft;
+    LineRenderer drawLineLeft;
+
+    GameObject newlineRight;
+    LineRenderer drawLineRight;
 
     float linewidth = 0.02f;
 
@@ -19,15 +25,24 @@ public class LineDrawer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        linepoints = new List<Vector3>();
-        newline = new GameObject("LineDrawer");
-        drawLine = newline.AddComponent<LineRenderer>();
-        drawLine.material = new Material(Shader.Find("Sprites/Default"));
-        drawLine.startWidth = linewidth;
-        drawLine.endWidth  = linewidth;
-        drawLine.startColor = Color.red;
-        drawLine.endColor = Color.red;
-        
+        linepointsLeft = new List<Vector3>();
+        newlineLeft = new GameObject("LineDrawerLeft");
+        drawLineLeft = newlineLeft.AddComponent<LineRenderer>();
+        drawLineLeft.material = new Material(Shader.Find("Sprites/Default"));
+        drawLineLeft.startWidth = linewidth;
+        drawLineLeft.endWidth  = linewidth;
+        drawLineLeft.startColor = Color.red;
+        drawLineLeft.endColor = Color.red;
+
+        linepointsRight = new List<Vector3>();
+        newlineRight = new GameObject("LineDrawerRight");
+        drawLineRight = newlineRight.AddComponent<LineRenderer>();
+        drawLineRight.material = new Material(Shader.Find("Sprites/Default"));
+        drawLineRight.startWidth = linewidth;
+        drawLineRight.endWidth  = linewidth;
+        drawLineRight.startColor = Color.red;
+        drawLineRight.endColor = Color.red;
+
     }
 
     // Update is called once per frame
@@ -37,15 +52,20 @@ public class LineDrawer : MonoBehaviour
         // Transform laserAnchor = NRInput.AnchorsHelper.GetAnchor(NRInput.RaycastMode == RaycastModeEnum.Gaze ? ControllerAnchorEnum.GazePoseTrackerAnchor : handControllerAnchor);
         // Vector3 endpoint = laserAnchor.transform.position+laserAnchor.transform.forward*10;
         // AddLinePoint(endpoint);
-        drawLine.positionCount = linepoints.Count;
-        drawLine.SetPositions(linepoints.ToArray());
+        drawLineLeft.positionCount = linepointsLeft.Count;
+        drawLineLeft.SetPositions(linepointsLeft.ToArray());
+
+        drawLineRight.positionCount = linepointsRight.Count;
+        drawLineRight.SetPositions(linepointsRight.ToArray());
     }
 
-    public void AddLinePoint(Vector3 point){
-        linepoints.Add(point);
+    public void AddLinePoint(Vector3 point,string name){
+        if (name=="left")linepointsLeft.Add(point);
+        else if(name=="right")linepointsRight.Add(point);
     }
 
     public void ClearLinePoint(){
-        linepoints.Clear();
+        linepointsLeft.Clear();
+        linepointsRight.Clear();
     }
 }

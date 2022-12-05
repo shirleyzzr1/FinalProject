@@ -87,8 +87,12 @@ public class ArucoDetector : MonoBehaviour
     Vector3 last_right;
 
 
-    private List<string> timestamp = new List<string>();
+    private List<string> timestampleft = new List<string>();
     private List<Vector3> leftPos = new List<Vector3>();
+    private List<string> timestampright = new List<string>();
+
+    private List<Vector3> rightPos = new List<Vector3>();
+
 
     GalleryDataProvider galleryDataTool;
 
@@ -157,26 +161,11 @@ public class ArucoDetector : MonoBehaviour
             rightCube.GetComponent<scoreCounting>().scores = 0;
             reset_score = false;
 
-            string filename = string.Format("pace_result_{0}.txt", NRTools.GetTimeStamp().ToString());
-            string folder = string.Format("{0}", Application.persistentDataPath);
-            if (!Directory.Exists(folder))
-            {
-                    Directory.CreateDirectory(folder);
-            }
-            string[] result = new string[leftPos.Count];
-            for(int i=0;i<leftPos.Count;i++){
-                result[i] = timestamp[i]+" "+ leftPos[i].x.ToString() + " "+leftPos[i].y.ToString()+ " "+ leftPos[i].z.ToString();
-            }
-            File.WriteAllLines(string.Format("{0}/{1}", folder, filename), result);
-            if (galleryDataTool == null)
-            {
-                galleryDataTool = new GalleryDataProvider();
-            }
-
-            galleryDataTool.InserttxtFile(string.Format("{0}/{1}", folder, filename), filename, "Pacedata");
-            timestamp.Clear();
-            leftPos.Clear();
+            savePacedata("left",ref leftPos,ref timestampleft);
+            savePacedata("right",ref rightPos,ref timestampright);
+            Debug.Log("clear score");
             LineDrawer.Instance.ClearLinePoint();
+            Debug.Log("clear line points");
 
 
         }
@@ -205,7 +194,8 @@ public class ArucoDetector : MonoBehaviour
                     break;
                 }
                 using (Mat rvec = new Mat (rvecs, new OpenCVForUnity.CoreModule.Rect (0, i, 1, 1)))
-                using (Mat tvec = new Mat (tvecs, new OpenCVForUnity.CoreModule.Rect (0, i, 1, 1))){
+                using (Mat tvec = new Mat (tvecs, new OpenCVForUnity.CoreModule.Rect (0, i, 1, 1)))
+                {
                     // Convert to unity pose data.
                     double[] rvecArr = new double[3];
                     rvec.get (0, 0, rvecArr);
@@ -216,21 +206,49 @@ public class ArucoDetector : MonoBehaviour
                     ARM = ARUtils.ConvertPoseDataToMatrix (ref poseData, true);
                     ARM = RGBCamera.transform.localToWorldMatrix*ARM;
                     var position = new Vector3(ARM[0,3], ARM[1,3], ARM[2,3]);
-                    if(i==0){
+                    if(ids.get(i,0)[0]==0){
                         leftCube.transform.position = position;
                         leftCube.transform.rotation = ARM.rotation;
                         leftPos.Add(position);
-                        timestamp.Add(NRTools.GetTimeStamp().ToString());
-                        LineDrawer.Instance.AddLinePoint(position);
+                        timestampleft.Add(NRTools.GetTimeStamp().ToString());
+                        LineDrawer.Instance.AddLinePoint(position,"left");
+
                     }
-                    else{
+                    else if(ids.get(i,0)[0]==1){
                         rightCube.transform.position = position;
                         rightCube.transform.rotation = ARM.rotation;
+                        rightPos.Add(position);
+                        timestampright.Add(NRTools.GetTimeStamp().ToString());
+                        LineDrawer.Instance.AddLinePoint(position,"right");
                     }
 
                 }
             }
         }
+    }
+
+    void savePacedata(string name,ref List<Vector3>pos,ref List<string> timestamp){
+        string filename = string.Format("pace_result_{0}.txt", NRTools.GetTimeStamp().ToString());
+        filename = name+"_"+filename;
+        string folder = string.Format("{0}", Application.persistentDataPath);
+        if (!Directory.Exists(folder))
+        {
+                Directory.CreateDirectory(folder);
+        }
+        string[] result = new string[pos.Count];
+        for(int i=0;i<pos.Count;i++){
+            result[i] = timestamp[i]+" "+ pos[i].x.ToString() + " "+pos[i].y.ToString()+ " "+ pos[i].z.ToString();
+        }
+        File.WriteAllLines(string.Format("{0}/{1}", folder, filename), result);
+        if (galleryDataTool == null)
+        {
+            galleryDataTool = new GalleryDataProvider();
+        }
+
+        galleryDataTool.InserttxtFile(string.Format("{0}/{1}", folder, filename), filename, "Pacedata");
+        pos.Clear();
+        timestamp.Clear();
+
     }
 
 }
