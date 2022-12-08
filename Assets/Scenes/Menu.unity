@@ -249,7 +249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5658424773558833754, guid: 9ba4a60e3e56bf947b53bd34f0325842, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5658424773968119982, guid: 9ba4a60e3e56bf947b53bd34f0325842, type: 3}
       propertyPath: m_AnchorMax.y
@@ -981,6 +981,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8952194971732509876, guid: a65a29a846c98d906a731be8bc0d81a4, type: 3}
+      propertyPath: m_UICamera
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9054125496678580760, guid: a65a29a846c98d906a731be8bc0d81a4, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1035,7 +1039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9056032654245542576, guid: a65a29a846c98d906a731be8bc0d81a4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a65a29a846c98d906a731be8bc0d81a4, type: 3}

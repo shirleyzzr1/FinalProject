@@ -156,7 +156,6 @@ public class Detector : MonoBehaviour
 
 
     /// <summary> Use softmax to choose the class with highest value</summary>
-
     private float[] Softmax(float[] values)
     {
         var maxVal = values.Max();
@@ -220,7 +219,6 @@ public class Detector : MonoBehaviour
     }
 
     /// <summary> Calculate intersection area for two bounding box/summary>
-
     private float IntersectionOverUnion(Rect boundingBoxA, Rect boundingBoxB)
     {
         var areaA = boundingBoxA.width * boundingBoxA.height;
@@ -244,7 +242,6 @@ public class Detector : MonoBehaviour
     }
 
     /// <summary> Use NMS to remove overlapped bounding box /summary>
-
     private IList<BoundingBox> FilterBoundingBoxes(IList<BoundingBox> boxes, int limit, float threshold)
     {
         Debug.Log("boxcount: "+boxes.Count);
