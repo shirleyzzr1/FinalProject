@@ -11,9 +11,10 @@ https://www.youtube.com/watch?v=hwb22EpPZPA
 ### Software Requirements
 
 1. Unity 2021.3.0f1
-2. Nebular V3.3.1
+2. Nebular V3.1.1(Works better for RGBCamera than V3.2)
 3. NRSDK 1.9.5
 4. OpenCV for Unity 2.4.9
+4. Barracuda 3.0.0(Only for shoe detection not for marker)
 
 ### Installation
 
@@ -25,9 +26,11 @@ To build your own apk file
 
 2.Open the Project in Unity
 
-3.Uncheck multi-threaded rendering and set Write Permission to external
+3.In Build Settings-Player Setting,uncheck multi-threaded rendering and set Write Permission to external
 
-Feature in development
+4.Select platform to be Android to build apk file , and add the Menu scene under Assets/Scenes and for Rehabilitation game demo or Add shoeDetection scene to  for shoe detection demo.
 
-- [ ] Direct shoe detection without marker attached
-- [ ] Step Analysis based on position of the feet
+### Modification
+
+For shoeDetection Scene, check CameraStreaming to test the scene with RGBCamera or uncheck it to test the result for single picture. 
+
