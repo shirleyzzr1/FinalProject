@@ -12,7 +12,7 @@ https://www.youtube.com/watch?v=hwb22EpPZPA
 
 1. Unity 2021.3.0f1
 2. Nebular V3.1.1(Works better for RGBCamera than V3.2)
-3. NRSDK 1.9.5
+3. NRSDK 1.9.5(Already included in the repo because I made some changes)
 4. OpenCV for Unity 2.4.9
 4. Barracuda 3.0.0(Only for shoe detection not for marker)
 
@@ -22,13 +22,13 @@ If you just want to try out the demo, install the FinalProject.apk file to your 
 
 To build your own apk file
 
-1.Clone the repository
+1.git clone the repository
 
-2.Open the Project in Unity
+2.Open the Project in Unity(There will be some errors because OpenCVForUnity is not imported yet, continue open the project and exit safe mode once opened)
 
-3.In Build Settings-Player Setting,uncheck multi-threaded rendering and set Write Permission to external
+3.Import OpenCVForUnity Package
 
-4.Select platform to be Android to build apk file , and add the Menu scene under Assets/Scenes and for Rehabilitation game demo or Add shoeDetection scene to  for shoe detection demo.
+4.Switch platform to be Android to build apk file , and add the Menu scene under Assets/Scenes and for Rehabilitation game demo or Add shoeDetection scene to  for shoe detection demo.
 
 ### Modification
 
