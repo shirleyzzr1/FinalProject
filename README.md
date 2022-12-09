@@ -1,7 +1,7 @@
 ## README
 
 Here's the current demo for the game
-https://www.youtube.com/watch?v=hwb22EpPZPA
+https://user-images.githubusercontent.com/70987668/206808148-c406e83a-e180-4cb1-8edf-2120db8fe049.mp4
 
 ### Hardware Requirements
 
@@ -33,4 +33,8 @@ To build your own apk file
 ### Modification
 
 For shoeDetection Scene, check CameraStreaming to test the scene with RGBCamera or uncheck it to test the result for single picture. 
+
+### Results
+
+Saved pacedata can be viewed under Documents and saved videos can be viewed under Videos on your mobile phone
 

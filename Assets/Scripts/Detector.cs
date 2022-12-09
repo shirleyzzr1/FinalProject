@@ -52,12 +52,10 @@ public class Detector : MonoBehaviour
     public const float CELL_HEIGHT = 32;
     private string[] labels;
     /// <summary> anchors provided in the yolov2-tiny cfg </summary>
-
     private float[] anchors = new float[]
     {
         1.08F, 1.19F, 3.42F, 4.41F, 6.63F, 11.38F, 9.42F, 5.11F, 16.62F, 10.52F
     };
-
 
     public void Start()
     {

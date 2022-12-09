@@ -96,6 +96,9 @@ public class ArucoDetector : MonoBehaviour
 
     GalleryDataProvider galleryDataTool;
 
+    Matrix4x4 invertYM;
+    Matrix4x4 invertZM;
+
 
     /// <summary> Start is called before the first frame update. </summary>
     void Start()
@@ -123,7 +126,7 @@ public class ArucoDetector : MonoBehaviour
         m_Canvas = GameObject.Find("Score");
         m_SimpleCollectibleScript = new SimpleCollectibleScript();
 
-        int max_d = (int)Mathf.Max (width, height);
+        int max_d = (int)Mathf.Max(width, height);
         double fx = max_d;
         double fy = max_d;
         double cx = width / 2.0f;
@@ -138,9 +141,10 @@ public class ArucoDetector : MonoBehaviour
         camMatrix.put (2, 0, 0);
         camMatrix.put (2, 1, 0);
         camMatrix.put (2, 2, 1.0f);
+        distCoeffs = new MatOfDouble(0,0,0,0);
 
-        distCoeffs = new MatOfDouble (0, 0, 0, 0);
-
+        invertYM = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(1, -1, 1));
+        invertZM = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(1, 1, -1));
 
     }
 
@@ -201,10 +205,13 @@ public class ArucoDetector : MonoBehaviour
                     rvec.get (0, 0, rvecArr);
                     double[] tvecArr = new double[3];
                     tvec.get (0, 0, tvecArr);
+                    tvecArr[2] = tvecArr[2]-0.06;
                     PoseData poseData = ARUtils.ConvertRvecTvecToPoseData (rvecArr, tvecArr);
                     // Convert to transform matrix.
                     ARM = ARUtils.ConvertPoseDataToMatrix (ref poseData, true);
                     ARM = RGBCamera.transform.localToWorldMatrix*ARM;
+
+
                     var position = new Vector3(ARM[0,3], ARM[1,3], ARM[2,3]);
                     if(ids.get(i,0)[0]==0){
                         leftCube.transform.position = position;
